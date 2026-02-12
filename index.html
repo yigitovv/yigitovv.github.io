@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayohat Dunyosi - Tur Agentligi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/><path fill="%23764ba2" d="M0 300L50 320C100 340 200 380 300 390C400 400 500 380 600 360C700 340 800 320 900 330C1000 340 1100 380 1150 400L1200 420V600H0Z" opacity="0.5"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 300px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        /* Destinations */
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .destination-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .destination-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .destination-info {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .destination-info h3 {
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .destination-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            color: #f5576c;
+            font-weight: bold;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        /* Why Us */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature {
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #f5576c;
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info div {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .contact-form button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">✈️ Sayohat Dunyosi</div>
+            <ul class="nav-links">
+                <li><a href="#home">Bosh sahifa</a></li>
+                <li><a href="#about">Biz haqimizda</a></li>
+                <li><a href="#destinations">Yo'nalishlar</a></li>
+                <li><a href="#services">Xizmatlar</a></li>
+                <li><a href="#contact">Aloqa</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Dunyoni Kashf Eting</h1>
+            <p>Eng yaxshi narxlarda unutilmas sayohatlar</p>
+            <a href="#destinations" class="btn">Sayohatni boshlang</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Biz Haqimizda</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Sayohat Dunyosi - O'zbekistondagi yetakchi tur agentliklaridan biri. Biz 2010 yildan beri mijozlarimizga professional xizmat ko'rsatib kelmoqdamiz.</p>
+                <p>Bizning jamoamiz har bir sayohatni unutilmas qilish uchun ishlamoqda. Sifatli xizmat, qulay narxlar va professional yondashuv bizning asosiy tamoyillarimizdir.</p>
+                <p>Minglab mamnun mijozlar bizning eng katta yutuqimizdir!</p>
+            </div>
+            <div class="about-image">
+                🌍
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations">
+        <h2>Mashhur Yo'nalishlar</h2>
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <div class="destination-image">🇹🇷</div>
+                <div class="destination-info">
+                    <h3>Turkiya</h3>
+                    <p>Istanbul, Antalya, Kapadokiya - ajoyib tarixiy va dam olish joylari</p>
+                    <div class="price">$450 dan boshlab</div>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="destination-image">🇦🇪</div>
+                <div class="destination-info">
+                    <h3>Dubay</h3>
+                    <p>Zamonaviy arxitektura va hashamatli dam olish</p>
+                    <div class="price">$800 dan boshlab</div>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="destination-image">🇪🇺</div>
+                <div class="destination-info">
+                    <h3>Evropa</h3>
+                    <p>Italiya, Frantsiya, Ispaniya - tarixiy shaharlar touri</p>
+                    <div class="price">$1200 dan boshlab</div>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="destination-image">🇹🇭</div>
+                <div class="destination-info">
+                    <h3>Tailand</h3>
+                    <p>Ekzotik tabiat va ajoyib plyajlar</p>
+                    <div class="price">$650 dan boshlab</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>Bizning Xizmatlarimiz</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">✈️</div>
+                <h3>Aviachiptalar</h3>
+                <p>Dunyoning istalgan nuqtasiga eng qulay narxlarda aviachiptalar</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏨</div>
+                <h3>Mehmonxonalar</h3>
+                <p>3 dan 5 yulduzli mehmonxonalargacha turli xil variantlar</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Viza xizmati</h3>
+                <p>Viza olishda to'liq ko'mak va maslahat</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Transfer</h3>
+                <p>Aeroport va shahar bo'ylab qulay transfer xizmati</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us">
+        <h2>Nega Bizni Tanlash Kerak?</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Qulay narxlar</h3>
+                <p>Bozordagi eng yaxshi takliflar</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <h3>Sifatli xizmat</h3>
+                <p>Professional yondashuv</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤝</div>
+                <h3>Ishonchlilik</h3>
+                <p>10+ yillik tajriba</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📞</div>
+                <h3>24/7 qo'llab-quvvatlash</h3>
+                <p>Doimo aloqadamiz</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Biz Bilan Bog'laning</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div>
+                    <h3>📞 Telefon</h3>
+                    <p>+998 95 133 28 04</p>
+                </div>
+                <div>
+                    <h3>📍 Manzil</h3>
+                    <p>Toshkent viloyati, Yashnabod tumani, Parkent 444</p>
+                </div>
+                <div>
+                    <h3>⏰ Ish vaqti</h3>
+                    <p>Dushanba - Shanba: 9:00 - 18:00<br>Yakshanba: Dam olish</p>
+                </div>
+            </div>
+            <div class="contact-form">
+                <input type="text" placeholder="Ismingiz" required>
+                <input type="tel" placeholder="Telefon raqamingiz" required>
+                <input type="email" placeholder="Email" required>
+                <textarea rows="5" placeholder="Xabaringiz" required></textarea>
+                <button type="submit">Yuborish</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Sayohat Dunyosi. Barcha huquqlar himoyalangan.</p>
+        <p>📱 Telegram | 📘 Facebook | 📷 Instagram</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form button').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Xabaringiz qabul qilindi! Tez orada siz bilan bog\'lanamiz.');
+        });
+    </script>
+</body>
+</html>
